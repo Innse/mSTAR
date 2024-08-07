@@ -1,0 +1,7 @@
+**/__pycache__/
+
+/downstream_task/
+/pretrain_aggregator/
+/pretrain_extractor/
+
+/Feature_extract/models/ckpts/
