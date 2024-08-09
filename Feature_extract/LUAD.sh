@@ -16,7 +16,7 @@ CSV_FILE_NAME="./dataset_csv/LUAD.csv"
 DIR_TO_COORDS="your own DIR_TO_COORDS"
 DATA_DIRECTORY="your own DATA_DIRECTORY"
 
-FEATURES_DIRECTORY="where you what to store the features"
+FEATURES_DIRECTORY="where you want to store the features"
 
 datatype="tcga" # extra path process for TCGA dataset, direct mode do not care use extra path
 ext=".svs"

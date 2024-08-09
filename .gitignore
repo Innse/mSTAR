@@ -1,4 +1,6 @@
 **/__pycache__/
+**/results/
+**/wandb/
 
 /downstream_task/
 /pretrain_aggregator/
