@@ -14,13 +14,14 @@
  -->
 ## Todo list
 - [ ] Huggingface lib is under preparing  
-- [ ] Downstream tasks are under preparing  
 
 ## Installation
 ### OS Requirements
-This repo has been tested on the following system:
+This repo has been tested on the following system and GPU:
 - Ubuntu 22.04.3 LTS
-  
+- NVIDIA H800 PCIe 80GB
+
+
 First clone the repo and cd into the directory:
 
 ```bash
@@ -37,7 +38,7 @@ Activate the environment:
 ```bash
 conda activate mSTAR
 ```
-
+## Usage
 ### Getting access of the model
 
 Request access to the model weights from the 🤗Huggingface model page at: [https://huggingface.co/Wangyh/mSTAR](https://huggingface.co/Wangyh/mSTAR) (Note: under preparing)
@@ -75,25 +76,27 @@ image = Image.open("patch.png")
 image = transform(image).unsqueeze(dim=0) 
 feature_emb = model(image)
 ```
-You can also try it in [tutorial.ipynb](https://github.com/Innse/mSTAR/blob/main/tutorial.ipynb).
+You can also try it in [tutorial.ipynb](tutorial.ipynb).
+### Feature extractor for WSIs
+Meanwhile, we provide the example showing how to conduct feature extract on [TCGA-LUSC](https://portal.gdc.cancer.gov/projects/TCGA-LUSC) based on [CLAM](https://github.com/mahmoodlab/CLAM).
 
-Meanwhile, we provide the example showing how to conduct feature extract on Whole Slides Images based on [CLAM](https://github.com/mahmoodlab/CLAM).
+In [Feature_extract/LUSC.sh](Feature_extract/LUSC.sh), you need to set the following directories:
 
-In [Feature_extract/LUAD.sh](https://github.com/Innse/mSTAR/blob/main/Feature_extract/LUAD.sh), you need to set the ```DIR_TO_COORDS``` and ```DATA_DIRECTORY``` based on the directory you got from [CLAM](https://github.com/mahmoodlab/CLAM).
+- DATA_DIRECTORY: This should be set to the directory which contains the WSI data.
+- DIR_TO_COORDS: This should be set to the directory that contains the coordinate information for the WSI patches preprocessed through [CLAM](https://github.com/mahmoodlab/CLAM).
+- FEATURES_DIRECTORY: This is the directory where you want to store the extracted features. 
 ```bash
-save_storage="yes"
 models='mSTAR'
 declare -A gpus
 gpus['mSTAR']=0
 
-CSV_FILE_NAME="./dataset_csv/LUAD.csv"
+CSV_FILE_NAME="./dataset_csv/LUSC.csv"
 
-DIR_TO_COORDS="your own DIR_TO_COORDS"
-DATA_DIRECTORY="your own DATA_DIRECTORY"
+DIR_TO_COORDS="path/DIR_TO_COORDS"
+DATA_DIRECTORY="path/DATA_DIRECTORY"
 
-FEATURES_DIRECTORY="where you what to store the features"
+FEATURES_DIRECTORY="path/features"
 
-datatype="tcga" 
 ext=".svs"
 for model in $models
 do
@@ -107,15 +110,70 @@ do
                 --feat_dir $FEATURES_DIRECTORY \
                 --batch_size 256 \
                 --model $model \
-                --datatype $datatype \
-                --slide_ext $ext \
-                --save_storage $save_storage
+                --slide_ext $ext
 done
 ```
+For more details about feature extraction, please check [here](Feature_extract/README.md)
 
+## Downstream Task
+We currently support the following downstram task:
+- [Slide-level Diagnostic Tasks](downstream_task/diagnosis_preidction)
+- [Molecular Prediction](downstream_task/molecular_prediction)
+- [Cancer Survival Prediction](downstream_task/survival_prediction)
+- [Multimodal Survival Analysis](downstream_task/multimodal_survival)
+- [Few-shot Slide Classification](downstream_task/fewshot_classification)
+- [Zero-shot Slide Classification](downstream_task/zeroshot_classification)
+- [Report Generation](downstream_task/report_generation)
+
+Here is a simple demo on how to conduct cancer survival prediction on TCGA-LUSC
+
+The feature directory should look like:
+```
+TCGA-LUSC
+  └─pt_files
+      └─mSTAR
+        ├── feature_1.pt
+        ├── feature_2.pt
+        ├── feature_3.pt
+        └── ...
+
+```
+You need to specify the path of the feature directory and choose the model. After you have completed all the settings, you can run the following commands.
+```bash
+feature_path='/feature_path' #change here
+studies='LUSC'
+models='AttMIL'
+features='mSTAR'
+lr=2e-4
+# ckpt for pretrained aggregator
+# aggregator='aggregator'
+# export WANDB_MODE=dryrun
+cd ..
+for feature in $features
+do
+    for study in $studies
+    do
+        for model in $models
+        do
+            CUDA_VISIBLE_DEVICES=0 python main.py --model $model \
+                                                --csv_file ./dataset_csv/${study}_Splits.csv \
+                                                --feature_path $feature_path \
+                                                --study $study \
+                                                --modal WSI \
+                                                --num_epoch 30 \
+                                                --batch_size 1 \
+                                                --lr $lr \
+                                                --feature $feature \
+        done
+    done
+done
+
+```
+
+The total time to run this demo may take around **10** mins for AttMIL. For more details about survival prediction, please check [here](downstream_task/survival_prediction/README.md)
 
 ## Acknowledgements
-The project was built on top of amazing repositories such as [UNI](https://github.com/mahmoodlab/UNIn), [CLAM](https://github.com/mahmoodlab/CLAM), [OpenCLIP](https://github.com/mlfoundations/open_clip),  and [Timm](https://github.com/huggingface/pytorch-image-models/) (ViT model implementation). We thank the authors and developers for their contribution. 
+The project was built on top of amazing repositories such as [UNI](https://github.com/mahmoodlab/UNIn), [CLAM](https://github.com/mahmoodlab/CLAM) and [OpenCLIP](https://github.com/mlfoundations/open_clip). We thank the authors and developers for their contribution. 
 
 
 ## Reference
@@ -134,6 +192,11 @@ Xu, Y., Wang, Y., Zhou, F., Ma, J., Yang, S., Lin, H., ... & Chen, H. (2024). A 
       url={https://arxiv.org/abs/2407.15362}, 
 }
 ```
+
+## License and Terms of Tuse
+
+ⓒ SmartLab. This model and associated code are released under the [CC-BY-NC-ND 4.0]((https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en)) license and may only be used for non-commercial, academic research purposes with proper attribution.Any commercial use, sale, or other monetizationof the mSTAR model and its derivatives, which include models trained on outputs from the mSTAR model or datasetscreated from the mSTAR model, is prohibited and reguires prior approval.
+
 
 If you have any question, feel free to email [Yingxue XU](yxueb@connect.ust.hk) and [Yihui WANG](ywangrm@connect.ust.hk).
 

@@ -1,0 +1,69 @@
+{
+    "0": {
+        "classnames": {
+            "Positive": [
+                "ER positive",
+                "ER+",
+                "ER positive breast cancer",
+                "Estrogen Receptor positive",
+                "ER+ breast cancer",
+                "ER positive carcinoma",
+                "Estrogen Receptor positive breast cancer"
+            ],
+            "Negative": [
+                "ER negative",
+                "ER-",
+                "ER negative breast cancer",
+                "Estrogen Receptor negative",
+                "ER- breast cancer",
+                "ER negative carcinoma",
+                "Estrogen Receptor negative breast cancer"
+            ]
+        },
+        "templates": [
+            "CLASSNAME.",
+            "a photomicrograph showing CLASSNAME.",
+            "a photomicrograph of CLASSNAME.",
+            "an image of CLASSNAME.",
+            "an image showing CLASSNAME.",
+            "an example of CLASSNAME.",
+            "CLASSNAME is shown.",
+            "this is CLASSNAME.",
+            "there is CLASSNAME.",
+            "a histopathological image showing CLASSNAME.",
+            "a histopathological image of CLASSNAME.",
+            "a histopathological photograph of CLASSNAME.",
+            "a histopathological photograph showing CLASSNAME.",
+            "shows CLASSNAME.",
+            "presence of CLASSNAME.",
+            "CLASSNAME is present.",
+            "an H&E stained image of CLASSNAME.",
+            "an H&E stained image showing CLASSNAME.",
+            "an H&E image showing CLASSNAME.",
+            "an H&E image of CLASSNAME.",
+            "CLASSNAME, H&E stain.",
+            "CLASSNAME, H&E.",
+            "Close-up view of CLASSNAME.",
+            "Detailed image capturing CLASSNAME.",
+            "Microscopic analysis reveals CLASSNAME.",
+            "CLASSNAME under magnification.",
+            "The structure of CLASSNAME is visible.",
+            "Diagnosing CLASSNAME.",
+            "Typical appearance of CLASSNAME.",
+            "Zoomed image of CLASSNAME.",
+            "CLASSNAME in detail.",
+            "CLASSNAME at high magnification.",
+            "CLASSNAME in a clinical sample.",
+            "Clinical representation of CLASSNAME.",
+            "Pathological review of CLASSNAME.",
+            "Characteristics of CLASSNAME observed.",
+            "CLASSNAME identified.",
+            "Diagnosis: CLASSNAME.",
+            "Specimen showing CLASSNAME.",
+            "View of CLASSNAME with immunohistochemistry.",
+            "CLASSNAME with special staining.",
+            "Observation of CLASSNAME with fluorescent staining."
+        ]
+        
+    }
+}

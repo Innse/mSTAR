@@ -98,18 +98,6 @@ def light_compute_w_loader(file_path, wsi, model,
 	return features, coords
 
 
-def find_path_for_tcga_wsi(root, slide_id, ext, datatype):
-	if datatype.lower() == 'tcga':
-		dirs = os.listdir(root)
-		for d in dirs:
-			slide_file_path = os.path.join(root, d, slide_id+ext)
-			if os.path.exists(slide_file_path):
-				return slide_file_path
-	else:
-		slide_file_path = os.path.join(root, slide_id+ext)
-		return slide_file_path
-
-
 def find_all_wsi_paths(wsi_root, ext):
     """
     find the full wsi path under data_root, return a dict {slide_id: full_path}
@@ -137,8 +125,6 @@ parser.add_argument('--no_auto_skip', default=False, action='store_true')
 parser.add_argument('--custom_downsample', type=int, default=1)
 parser.add_argument('--target_patch_size', type=int, default=-1)
 parser.add_argument('--model', type=str)
-parser.add_argument('--datatype', type=str)
-parser.add_argument('--save_storage', type=str, default='no')
 
 
 parser.add_argument('--model_checkpoint', type=str, default=None)
