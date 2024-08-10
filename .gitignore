@@ -1,9 +1,7 @@
+**/*_test.sh
 **/__pycache__/
 **/results/
 **/wandb/
 
-/downstream_task/
-/pretrain_aggregator/
-/pretrain_extractor/
-
-/Feature_extract/models/ckpts/
+/Feature_extract/models/ckpts
+/pretrain*
