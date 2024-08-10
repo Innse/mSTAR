@@ -17,6 +17,10 @@
 - [ ] Downstream tasks are under preparing  
 
 ## Installation
+### OS Requirements
+This repo has been tested on the following system:
+- Ubuntu 22.04.3 LTS
+  
 First clone the repo and cd into the directory:
 
 ```bash
