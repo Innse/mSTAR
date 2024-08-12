@@ -13,7 +13,7 @@
 <!-- <img src="assets/framework.png" width="500" alt="centered image" />
  -->
 ## Todo list
-- [ ] Huggingface lib is under preparing  
+- [x] Huggingface lib is under preparing  
 
 ## Installation
 ### OS Requirements
@@ -41,7 +41,7 @@ conda activate mSTAR
 ## Usage
 ### Getting access of the model
 
-Request access to the model weights from the 🤗Huggingface model page at: [https://huggingface.co/Wangyh/mSTAR](https://huggingface.co/Wangyh/mSTAR) (Note: under preparing)
+Request access to the model weights from the 🤗Huggingface model page at: [https://huggingface.co/Wangyh/mSTAR](https://huggingface.co/Wangyh/mSTAR)
 
 
 ### Creating model with downloaded weights
