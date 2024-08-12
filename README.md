@@ -126,7 +126,9 @@ We currently support the following downstram task:
 - [Report Generation](downstream_task/report_generation)
 
 Here is a simple demo on how to conduct cancer survival prediction on TCGA-LUSC
-
+```
+cd downstream_task/survival_prediction
+```
 The feature directory should look like:
 ```
 TCGA-LUSC

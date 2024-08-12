@@ -22,6 +22,10 @@ DIR_TO_COORDS
         └── ...
 ```
 3. Run the following command to conduct feature extraction on WSIs
+
+```bash
+cd Feature_extract
+```
 ```bash
 models='mSTAR'
 declare -A gpus

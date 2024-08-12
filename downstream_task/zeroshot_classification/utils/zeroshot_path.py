@@ -83,7 +83,6 @@ def zero_shot_classifier(model_name, classnames, templates, device=None, ckpt_pa
         from transformers import AutoTokenizer
         from models.mSTAR import Text_encoder
         print("Using mSTAR's text encoder")
-        print('Using uni_new')
         model = Text_encoder(config_text={'model_name_or_path':'dmis-lab/biobert-base-cased-v1.2'})
         model.to(device)
         model.eval()
