@@ -12,8 +12,6 @@
 
 <!-- <img src="assets/framework.png" width="500" alt="centered image" />
  -->
-## Todo list
-- [x] Huggingface lib is under preparing  
 
 ## Installation
 ### OS Requirements
