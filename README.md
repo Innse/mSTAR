@@ -195,7 +195,7 @@ Xu, Y., Wang, Y., Zhou, F., Ma, J., Yang, S., Lin, H., ... & Chen, H. (2024). A 
 
 ## License and Terms of Tuse
 
-ⓒ SmartLab. This model and associated code are released under the [CC-BY-NC-ND 4.0]((https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en)) license and may only be used for non-commercial, academic research purposes with proper attribution.Any commercial use, sale, or other monetizationof the mSTAR model and its derivatives, which include models trained on outputs from the mSTAR model or datasetscreated from the mSTAR model, is prohibited and reguires prior approval.
+ⓒ SmartLab. This model and associated code are released under the [CC-BY-NC-ND 4.0]((https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en)) license and may only be used for non-commercial, academic research purposes with proper attribution. Any commercial use, sale, or other monetization of the mSTAR model and its derivatives, which include models trained on outputs from the mSTAR model or datasets created from the mSTAR model, is prohibited and reguires prior approval.
 
 
 If you have any question, feel free to email [Yingxue XU](yxueb@connect.ust.hk) and [Yihui WANG](ywangrm@connect.ust.hk).
