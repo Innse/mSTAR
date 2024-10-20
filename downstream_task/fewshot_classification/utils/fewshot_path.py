@@ -155,15 +155,17 @@ def topj_pooling(logits, topj):
 
 @torch.no_grad()
 def get_slide_feature(classifier, dataloader, device, topj=(5, 10, 50, 100), model_name=None, ckpt_path=None):                                            
+
     num_class = len(dataloader.dataset.label_map.items())
     
+
     all_logits = {i: [] for i in range(num_class)}
     all_features = {i: [] for i in range(num_class)}
     
     for idx, data in enumerate(dataloader):  # batch size is always 1
         image_features = data['img'].to(device).squeeze(0)
         label = data['label'][0].item()
-        
+
         if model_name in ['resnet50', 'uni', 'mSTAR']:
             proj = nn.Linear(1024, 512).to(device)
             ckpt = torch.load(ckpt_path, map_location=device)
@@ -177,18 +179,31 @@ def get_slide_feature(classifier, dataloader, device, topj=(5, 10, 50, 100), mod
             msg = proj.load_state_dict(updated_ckpt)
             print('loading proj:', msg)
             image_features = proj(image_features)
-        
+
         image_features = F.normalize(image_features, dim=-1)
+        
 
         logits = image_features @ classifier
         
         all_logits[label].append(logits)
         all_features[label].append(image_features)
+    
+
+    for k in range(num_class):
+        if all_logits[k]: 
+            all_logits[k] = torch.cat(all_logits[k], dim=0)  
+            all_features[k] = torch.cat(all_features[k], dim=0)  
+    
 
     for k in range(num_class):
         if all_logits[k]:  
-            all_logits[k] = torch.cat(all_logits[k], dim=0)  
-            all_featur
+            maxj = min(max(topj), all_logits[k].size(0))
+            _, indices = torch.topk(all_logits[k], maxj, dim=0)  
+            indices = indices[:, k]  
+            all_features[k] = all_features[k][indices]  
+    
+    return all_features
+
 
 
 
