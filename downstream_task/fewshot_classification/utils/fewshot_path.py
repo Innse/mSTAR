@@ -154,15 +154,16 @@ def topj_pooling(logits, topj):
     return preds, pooled_logits, topj_logits_indices
 
 @torch.no_grad()
-def get_slide_feature(classifier, dataloader, device, topj = (5,10,50,100), model_name=None, ckpt_path=None):                                            
-    all_logits = {}
-    all_features = {}
-    for idx, data in enumerate((dataloader)): # batch size is always 1, 
+def get_slide_feature(classifier, dataloader, device, topj=(5, 10, 50, 100), model_name=None, ckpt_path=None):                                            
+    num_class = len(dataloader.dataset.label_map.items())
+    
+    all_logits = {i: [] for i in range(num_class)}
+    all_features = {i: [] for i in range(num_class)}
+    
+    for idx, data in enumerate(dataloader):  # batch size is always 1
         image_features = data['img'].to(device).squeeze(0)
         label = data['label'][0].item()
-        if label not in all_logits:
-            all_logits[label] = []
-            all_features[label] = []
+        
         if model_name in ['resnet50', 'uni', 'mSTAR']:
             proj = nn.Linear(1024, 512).to(device)
             ckpt = torch.load(ckpt_path, map_location=device)
@@ -174,24 +175,21 @@ def get_slide_feature(classifier, dataloader, device, topj = (5,10,50,100), mode
                     k = k.replace('proj.', '')
                     updated_ckpt[k] = v
             msg = proj.load_state_dict(updated_ckpt)
-            print('loading proj:',msg)
+            print('loading proj:', msg)
             image_features = proj(image_features)
-        image_features = F.normalize(image_features, dim=-1) 
+        
+        image_features = F.normalize(image_features, dim=-1)
+
         logits = image_features @ classifier
-        # print(logits.shape)
+        
         all_logits[label].append(logits)
         all_features[label].append(image_features)
-    for k in all_logits:
-        all_logits[k] = torch.cat(all_logits[k], dim=0)
-        all_features[k] = torch.cat(all_features[k], dim=0)
-    
-    # print(all_logits)
-    for k in all_logits:
-        maxj = min(max(topj), all_logits[k].size(0)) 
-        _, indices = torch.topk(all_logits[k], maxj, dim=0)
-        indices = indices[:,k]
-        all_features[k] = all_features[k][indices] 
-    return all_features
+
+    for k in range(num_class):
+        if all_logits[k]:  
+            all_logits[k] = torch.cat(all_logits[k], dim=0)  
+            all_featur
+
 
 
 @torch.no_grad()
@@ -263,7 +261,7 @@ def run_mizero(classifier, dataloader, device, topj=(1, 5, 10, 50, 100),
         targets_all.append(target.cpu().numpy())
 
         for j in topj:
-            if results[j] == 1.0:  # 如果预测正确
+            if results[j] == 1.0:  
                 correct_ids.append(sample_id)
             meters[j].update(results[j], n=1)  # Update AverageMeters with new results
 
@@ -306,7 +304,7 @@ def run_mizero(classifier, dataloader, device, topj=(1, 5, 10, 50, 100),
         dump['logits'] = logits_all
         dump['targets'] = targets_all
         dump['preds'] = preds_all
-        dump['correct_ids'] = correct_ids  # 保存预测正确的ID
+        dump['correct_ids'] = correct_ids  
         dump['temp_scale'] = nn.Parameter(torch.ones([]) * np.log(1 / 0.07)).exp().item()
         
         if dump_patch_level: 
