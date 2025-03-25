@@ -2,6 +2,6 @@
 **/__pycache__/
 **/results/
 **/wandb/
-
+.DS_Store
 /Feature_extract/models/ckpts
 /pretrain*

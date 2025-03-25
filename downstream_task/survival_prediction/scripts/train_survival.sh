@@ -4,7 +4,6 @@ studies='LUSC'
 
 models='AttMIL'
 # models='TransMIL'
-# models='TransMIL_Pre'
 
 
 features='mSTAR'
