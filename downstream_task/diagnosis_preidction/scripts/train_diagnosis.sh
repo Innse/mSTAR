@@ -1,6 +1,6 @@
 studies="BCNB_ER BCNB_HER2 BCNB_PR BRCA_molecular CRC_molecular GBMLGG_IDH1"
-ROOT_WSI="/path/to/wsi"
-aggregator="/path/to/pretrained/aggregator.pth"
+ROOT_WSI="/path/to/wsi_feat_dir"
+
 for study in $studies
 do
     CUDA_VISIBLE_DEVICES=0 nohup python main.py --model ABMIL \
