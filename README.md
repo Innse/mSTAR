@@ -1,7 +1,7 @@
 <!-- # mSTAR
 ## A Multimodal Knowledge-enhanced Whole-slide Pathology Foundation Model -->
 ![header](https://capsule-render.vercel.app/api?type=waving&height=140&color=gradient&text=mSTAR:&section=header&fontAlign=12&fontSize=45&textBg=false&descAlignY=45&fontAlignY=20&descSize=23&desc=A%20Multimodal%20Knowledge-enhanced%20Whole-slide%20Pathology%20Foundation%20Model&descAlign=52)
-[Paper](https://www.nature.com/articles/s41467-025-66220-x)
+[![Paper]](https://www.nature.com/articles/s41467-025-66220-x)
 [![Arxiv Page](https://img.shields.io/badge/Arxiv-2407.15362-red?style=flat-square)](https://arxiv.org/abs/2407.15362)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Innse/mSTAR?style=flat-square)
 [![Hugging face](https://img.shields.io/badge/%F0%9F%A4%97%20%20-mSTAR-yellow)](https://huggingface.co/Wangyh/mSTAR)
