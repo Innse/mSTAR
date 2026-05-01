@@ -1,6 +1,7 @@
 <!-- # mSTAR
 ## A Multimodal Knowledge-enhanced Whole-slide Pathology Foundation Model -->
 ![header](https://capsule-render.vercel.app/api?type=waving&height=140&color=gradient&text=mSTAR:&section=header&fontAlign=12&fontSize=45&textBg=false&descAlignY=45&fontAlignY=20&descSize=23&desc=A%20Multimodal%20Knowledge-enhanced%20Whole-slide%20Pathology%20Foundation%20Model&descAlign=52)
+[Paper](https://www.nature.com/articles/s41467-025-66220-x)
 [![Arxiv Page](https://img.shields.io/badge/Arxiv-2407.15362-red?style=flat-square)](https://arxiv.org/abs/2407.15362)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Innse/mSTAR?style=flat-square)
 [![Hugging face](https://img.shields.io/badge/%F0%9F%A4%97%20%20-mSTAR-yellow)](https://huggingface.co/Wangyh/mSTAR)
@@ -8,7 +9,7 @@
 --- 
 <img src="assets/mSTAR.webp" width="300px" align="right"/>
 
-**Abstract:** Remarkable strides in computational pathology have been made in the task-agnostic foundation model that advances the performance of a wide array of downstream clinical tasks. Despite the promising performance, there are still several challenges. First, prior works have resorted to either vision-only or vision-captions data, disregarding invaluable pathology reports and gene expression profiles which respectively offer distinct knowledge for versatile clinical applications. Second, the current progress in pathology FMs predominantly concentrates on the patch level, where the restricted context of patch-level pretraining fails to capture whole-slide patterns. Here we curated the largest multimodal dataset consisting of H\&E diagnostic whole slide images and their associated pathology reports and RNA-Seq data, resulting in 26,169 slide-level modality pairs from 10,275 patients across 32 cancer types. To leverage these data for CPath, we propose a novel whole-slide pretraining paradigm which injects multimodal knowledge at the whole-slide context into the pathology FM, called **M**ultimodal **S**elf-**TA**ught **PR**etraining (mSTAR). The proposed paradigm revolutionizes the workflow of pretraining for CPath, which enables the pathology FM to acquire the whole-slide context. To our knowledge, this is the first attempt to incorporate multimodal knowledge at the slide level for enhancing pathology FMs, expanding the modelling context from unimodal to multimodal knowledge and from patch-level to slide-level. To systematically evaluate the capabilities of mSTAR, extensive experiments including slide-level unimodal and multimodal applications, are conducted across 7 diverse types of tasks on 43 subtasks, resulting in the largest spectrum of downstream tasks. The average performance in various slide-level applications consistently demonstrates significant performance enhancements for mSTAR compared to SOTA FMs.
+**Abstract:** Computational pathology has advanced through foundation models, yet faces challenges in multimodal integration and capturing whole-slide context. Current approaches typically utilize either vision-only or image-caption data, overlooking distinct insights from pathology reports and gene expression profiles. Additionally, most models focus on patch-level analysis, failing to capture comprehensive whole-slide patterns. Here we present mSTAR (\textbf{M}ultimodal \textbf{S}elf-\textbf{TA}ught P\textbf{R}etraining), the pathology foundation model that incorporates three modalities: pathology slides, expert-created reports, and gene expression data, within a unified framework. Our dataset includes 26,169 slide-level modality pairs across 32 cancer types, comprising over 116 million patch images. This approach injects multimodal whole-slide context into patch representations, expanding modeling from single to multiple modalities and from patch-level to slide-level analysis. Across oncological benchmark spanning 97 tasks, mSTAR outperforms previous state-of-the-art models, particularly in molecular prediction and multimodal tasks, revealing that multimodal integration yields greater improvements than simply expanding vision-only datasets.
 
 <!-- <img src="assets/framework.png" width="500" alt="centered image" />
  -->
@@ -177,19 +178,17 @@ The project was built on top of amazing repositories such as [UNI](https://githu
 
 
 ## Reference
-If you find our work useful in your research or if you use parts of this code please consider citing our [paper](https://arxiv.org/abs/2407.15362):
+If you find our work useful in your research or if you use parts of this code please consider citing our [paper](https://www.nature.com/articles/s41467-025-66220-x):
 
-Xu, Y., Wang, Y., Zhou, F., Ma, J., Yang, S., Lin, H., ... & Chen, H. (2024). A Multimodal Knowledge-enhanced Whole-slide Pathology Foundation Model. arXiv preprint arXiv:2407.15362.
+Xu Y, Wang Y, Zhou F, et al. A multimodal knowledge-enhanced whole-slide pathology foundation model[J]. Nature Communications, 2025.
 
 ```
-@misc{xu2024multimodalknowledgeenhancedwholeslidepathology,
-      title={A Multimodal Knowledge-enhanced Whole-slide Pathology Foundation Model}, 
-      author={Yingxue Xu and Yihui Wang and Fengtao Zhou and Jiabo Ma and Shu Yang and Huangjing Lin and Xin Wang and Jiguang Wang and Li Liang and Anjia Han and Ronald Cheong Kin Chan and Hao Chen},
-      year={2024},
-      eprint={2407.15362},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2407.15362}, 
+@article{xu2025multimodal,
+  title={A multimodal knowledge-enhanced whole-slide pathology foundation model},
+  author={Xu, Yingxue and Wang, Yihui and Zhou, Fengtao and Ma, Jiabo and Jin, Cheng and Yang, Shu and Li, Jinbang and Zhang, Zhengyu and Zhao, Chenglong and Zhou, Huajun and others},
+  journal={Nature Communications},
+  year={2025},
+  publisher={Nature Publishing Group UK London}
 }
 ```
 
